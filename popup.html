@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>WA Contact Exporter</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111b21;
+      color: #e9edef;
+    }
+
+    header {
+      background: #202c33;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #2a3942;
+    }
+
+    header svg { flex-shrink: 0; }
+
+    header h1 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #00a884;
+    }
+    header p { font-size: 11px; color: #8696a0; margin-top: 2px; }
+
+    .body { padding: 16px; }
+
+    .instruction {
+      background: #202c33;
+      border-left: 3px solid #00a884;
+      border-radius: 4px;
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #8696a0;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .instruction strong { color: #e9edef; }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    #extractBtn {
+      background: #00a884;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    #extractBtn:hover { background: #06cf9c; }
+    #extractBtn:disabled { background: #2a3942; color: #8696a0; cursor: default; }
+
+    #csvBtn, #jsonBtn {
+      background: #2a3942;
+      color: #e9edef;
+      width: calc(50% - 4px);
+    }
+    #csvBtn:hover, #jsonBtn:hover { background: #3b4a54; }
+
+    .export-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    #status {
+      font-size: 12px;
+      min-height: 18px;
+      color: #8696a0;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    #status.error  { color: #f15c6d; }
+    #status.ok     { color: #00a884; }
+
+    #preview {
+      background: #202c33;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 11px;
+      color: #8696a0;
+      max-height: 140px;
+      overflow-y: auto;
+      display: none;
+    }
+    #preview .row { padding: 3px 0; border-bottom: 1px solid #2a3942; }
+    #preview .row:last-child { border: none; }
+    #preview .name  { color: #e9edef; font-weight: 500; }
+    #preview .phone { color: #8696a0; }
+  </style>
+</head>
+<body>
+  <header>
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35A9.96 9.96 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="#00a884"/>
+      <path d="M17 14.5c-.28-.14-1.65-.81-1.9-.9-.26-.1-.44-.14-.63.14-.19.28-.72.9-.88 1.08-.16.19-.32.21-.6.07-.28-.14-1.18-.44-2.25-1.4-.83-.74-1.39-1.66-1.55-1.94-.16-.28-.02-.43.12-.57.12-.12.28-.32.42-.48.14-.16.19-.28.28-.46.1-.19.05-.35-.02-.49-.07-.14-.63-1.52-.86-2.08-.23-.55-.46-.47-.63-.48H8.1c-.16 0-.44.06-.67.3-.23.23-.88.86-.88 2.1s.9 2.44 1.03 2.61c.14.17 1.77 2.7 4.29 3.79.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.32-.07-.12-.26-.19-.54-.33z" fill="#fff"/>
+    </svg>
+    <div>
+      <h1>Group Contact Exporter</h1>
+      <p>WhatsApp Web · Chrome Extension</p>
+    </div>
+  </header>
+
+  <div class="body">
+    <div class="instruction">
+      <strong>How to use:</strong><br>
+      1. Open a <strong>group chat</strong> in WhatsApp Web<br>
+      2. Click the <strong>group name</strong> at the top<br>
+      3. <strong>Scroll down</strong> in the panel until member names appear<br>
+      4. Click <strong>Extract Contacts</strong> below
+    </div>
+
+    <div id="status"></div>
+
+    <button id="extractBtn">⬇ Extract Contacts</button>
+
+    <div class="export-row" style="display:none" id="exportRow">
+      <button id="csvBtn">📄 Export CSV</button>
+      <button id="jsonBtn">{ } Export JSON</button>
+    </div>
+
+    <div id="preview"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

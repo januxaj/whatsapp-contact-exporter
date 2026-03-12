@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "WhatsApp Group Contact Exporter",
+  "version": "1.0",
+  "description": "Export contacts from WhatsApp Web group chats to CSV or JSON",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": ["https://web.whatsapp.com/*"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://web.whatsapp.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
