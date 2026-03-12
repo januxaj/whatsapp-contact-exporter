@@ -1,4 +1,4 @@
-// content.js — WhatsApp Web Group Contact Extractor v3 (robust)
+//whatsapp group contacts exporter software
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
